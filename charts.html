@@ -21,28 +21,28 @@
                 request.open('GET', "https://codestats.net/api/users/munix");
                 request.send();
                 request.onload = () => {
-                    console.log(request.response);
+                    //console.log(request.response);
                     output = JSON.parse(request.response);
                     reqArr = Object.entries(output.languages); 
                     reqArr.forEach(key => {
                         tempKey = Object.entries(output.languages);
-                        console.log(tempKey[i]);
+                        //console.log(tempKey[i]);
                         codeArr.push([tempKey[i][0], tempKey[i][1].xps]);
                         i++;
                     })
-                    console.log(codeArr);
-                    console.log(reqArr);
+                    //console.log(codeArr);
+                    //console.log(reqArr);
                     i = 0
                     for(t = 0; t < codeArr.length; t++){
                         lbels.push(codeArr[t][0])
                         deighta.push(codeArr[t][1])
 
                     }
-                    console.log(lbels);
-                    console.log(deighta);
-                    console.log("MARKER");
-                    console.log(lbels);
-                    console.log(deighta);
+                    //console.log(lbels);
+                    //console.log(deighta);
+                    //console.log("MARKER");
+                    //console.log(lbels);
+                    //console.log(deighta);
                     new Chart(document.getElementById("doughnut-chart"), {
                         type: 'doughnut',
                         data: {
