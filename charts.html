@@ -10,51 +10,46 @@
         <body style="background-color:#eeeeee">
 
             <script>
-                let request = new XMLHttpRequest();
-                let reqArr;
-                let tempKey;
-                let i = 0;
-                let pushArray;
-                var lbels = [];
-                var deighta = [];
-                let codeArr = [];
-                request.open('GET', "https://codestats.net/api/users/munix");
-                request.send();
-                request.onload = () => {
+                let request = new XMLHttpRequest(); // Lets me make the api call
+                let reqArr; // stores api response in an arrays
+                let tempKey; // used to get XP in each language from the request object
+                let i = 0; // had an issue so i had to use this up here, my bad.
+                var lbels = []; // used as labels for automatically generated chart
+                var deighta = []; // like data but d8a but deighta
+                let codeArr = []; // stores the arrays of labels and data
+                request.open('GET', "https://codestats.net/api/users/munix"); // makes api call
+                request.send(); 
+                request.onload = () => { // gets api result, converts it to an object and various sorted arrays. very inefficient.
                     //console.log(request.response);
                     output = JSON.parse(request.response);
                     reqArr = Object.entries(output.languages); 
-                    reqArr.forEach(key => {
+                    reqArr.forEach(key => { // had to do some jank because i had some issues
                         tempKey = Object.entries(output.languages);
                         codeArr.push([tempKey[i][0], tempKey[i][1].xps]);
                         i++;
                     })
-                    i = 0
-                    for(t = 0; t < codeArr.length; t++){
+                    for(let t = 0; t < codeArr.length; t++){ // filters and splits the nested arrays (format: [label, data])
                         lbels.push(codeArr[t][0])
                         deighta.push(codeArr[t][1])
 
                     }
-                    new Chart(document.getElementById("doughnut-chart"), {
+                    new Chart(document.getElementById("doughnut-chart"), { // makes a doughnut chart
                         type: 'doughnut',
                         data: {
                         labels: lbels,
                         datasets: [
                             {
-                                backgroundColor: palette('tol-rainbow', deighta.length).map(function(hex) {
-                                return '#' + hex;
+                                backgroundColor: palette('tol-rainbow', deighta.length).map(function(hex) { 
+                                return '#' + hex; // gets rainbow color palette from google palette, so chart looks sexy
                             }),
                             data: deighta
                             }
                         ]
                         },
 
-                        options: {
+                        options: { // im pretty i messed this part up
                         title: {
-                            display: false,
-                        },
-                        legend: {
-                            display: false,
+                            display: false, // no title to avoid issues with iframe
                         }
                         }
                     });
