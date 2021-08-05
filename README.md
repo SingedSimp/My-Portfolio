@@ -8,5 +8,5 @@
 - ~~Footer (social links)~~
 - ~~Finish about me (50 words)~~
 - ~~Add smooth scrolling on anchor links~~
-- Record and add in about me video
-- Finish project description & add repos (1/3)
+- ~~Record and add in about me video~~
+- ~~Finish project description & add repos (3/3)~~
